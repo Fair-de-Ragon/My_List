@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">My List</string>
+    <string name="where_to_buy">Где купить:</string>
+    <string name="description">Описание</string>
+    <string name="add_new_cell">adding cell</string>
+    <string name="name">Название:</string>
+    <string name="done_button">Готово</string>
+    <string name="exception">Не заполнены поля</string>
 </resources>
