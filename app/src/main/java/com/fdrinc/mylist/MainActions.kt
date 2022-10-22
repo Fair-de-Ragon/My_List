@@ -1,7 +1,5 @@
 package com.fdrinc.mylist
 
-import android.widget.Toast
-
 object MainActions {
 
     private val adapter: ListAdapter = ListAdapter()
@@ -9,18 +7,19 @@ object MainActions {
 
     fun addFirst(){
         listRepo.add(CellType("Молоко", "Магнит", "10%"))
+        adapter.setData(listRepo)
     }
 
     fun deleteCell(id: Int) {
         listRepo.removeAt(id)
-        adapter.updateData(listRepo)
+        adapter.insertData(listRepo)
     }
 
     fun addCell(name: String, whereToBuy: String, description: String): Boolean {
         return if (name.isNotEmpty() && whereToBuy.isNotEmpty() && description.isNotEmpty()) {
             val newCell = CellType(name, whereToBuy, description)
             listRepo.add(newCell)
-            adapter.updateData(listRepo)
+            adapter.insertData(listRepo)
             true
         } else false
     }

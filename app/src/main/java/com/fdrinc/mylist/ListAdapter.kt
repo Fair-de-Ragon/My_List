@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
@@ -16,15 +16,22 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
         val nameCellText: TextView = itemView.findViewById(R.id.nameCell)
         val whereToBuyText: TextView = itemView.findViewById(R.id.whereToBuy)
         val descriptionText: TextView = itemView.findViewById(R.id.description)
-        val deleteButton: Button = itemView.findViewById(R.id.delete_button)
+        val deleteButton: ImageButton = itemView.findViewById(R.id.delete_button)
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun updateData(updatedList: MutableList<CellType>) {
-        cellList.clear()
-        cellList.addAll(updatedList)
-
+    fun setData(list: MutableList<CellType>) {
+        cellList = list
         notifyDataSetChanged()
+    }
+
+    fun insertData(updatedList: MutableList<CellType>) {
+//        if (cellList != null){
+//            cellList.clear()
+//            cellList.addAll(updatedList)
+//        } else cellList = updatedList
+
+        notifyItemInserted(cellList.size - 1)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {

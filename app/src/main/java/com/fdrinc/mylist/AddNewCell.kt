@@ -1,6 +1,5 @@
 package com.fdrinc.mylist
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -9,11 +8,11 @@ import android.widget.TextView
 
 class AddNewCell : AppCompatActivity() {
 
-    lateinit var doneButton: Button
-    lateinit var nameInput: EditText
-    lateinit var whereToBuyInput: EditText
-    lateinit var descriptionInput: EditText
-    lateinit var exceptionText: TextView
+    private lateinit var doneButton: Button
+    private lateinit var nameInput: EditText
+    private lateinit var whereToBuyInput: EditText
+    private lateinit var descriptionInput: EditText
+    private lateinit var exceptionText: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,14 +25,12 @@ class AddNewCell : AppCompatActivity() {
         exceptionText = findViewById(R.id.exeption_text)
 
         doneButton.setOnClickListener {
-            if (nameInput.editableText.isNotEmpty() && whereToBuyInput.editableText.isNotEmpty() && exceptionText.editableText.isNotEmpty()) {
-                MainActions.addCell(
+            if (MainActions.addCell(
                     nameInput.editableText.toString(),
                     whereToBuyInput.editableText.toString(),
                     descriptionInput.editableText.toString()
-                )
-                onBackPressed()
-            } else exceptionText.setText(R.string.exception)
+                )) onBackPressed()
+            else exceptionText.setText(R.string.exception)
         }
     }
 
