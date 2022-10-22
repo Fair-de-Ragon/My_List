@@ -26,15 +26,14 @@ class AddNewCell : AppCompatActivity() {
         exceptionText = findViewById(R.id.exeption_text)
 
         doneButton.setOnClickListener {
-            if (!MainActions.addCell(
+            if (nameInput.editableText.isNotEmpty() && whereToBuyInput.editableText.isNotEmpty() && exceptionText.editableText.isNotEmpty()) {
+                MainActions.addCell(
                     nameInput.editableText.toString(),
                     whereToBuyInput.editableText.toString(),
                     descriptionInput.editableText.toString()
                 )
-            ) {
-                exceptionText.setText(R.string.exception)
-            }
-            startActivity(Intent(this, MainActivity::class.java))
+                onBackPressed()
+            } else exceptionText.setText(R.string.exception)
         }
     }
 
