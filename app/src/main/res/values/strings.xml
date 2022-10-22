@@ -6,4 +6,5 @@
     <string name="name">Название:</string>
     <string name="done_button">Готово</string>
     <string name="exception">Не заполнены поля</string>
+    <string name="delete_button">delete button</string>
 </resources>
