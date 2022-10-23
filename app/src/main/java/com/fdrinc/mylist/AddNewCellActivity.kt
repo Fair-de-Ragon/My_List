@@ -6,7 +6,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 
-class AddNewCell : AppCompatActivity() {
+class AddNewCellActivity : AppCompatActivity() {
 
     private lateinit var doneButton: Button
     private lateinit var nameInput: EditText

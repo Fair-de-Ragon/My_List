@@ -1,7 +1,7 @@
 package com.fdrinc.mylist
 
 data class CellType(
-    var nameOfProduct: String,
-    var whereToBuy: String,
-    var description: String
+    val nameOfProduct: String,
+    val whereToBuy: String,
+    val description: String
 )

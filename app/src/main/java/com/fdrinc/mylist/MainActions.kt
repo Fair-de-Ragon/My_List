@@ -4,13 +4,8 @@ import java.text.FieldPosition
 
 object MainActions {
 
-    private val adapter: ListAdapter = ListAdapter()
+    val adapter: ListAdapter = ListAdapter()
     var listRepo = mutableListOf<CellType>()
-
-    fun addFirst(){
-        listRepo.add(CellType("Молоко", "Магнит", "10%"))
-        adapter.setData(listRepo)
-    }
 
     fun deleteCell(position: Int) {
         listRepo.removeAt(position)
@@ -25,10 +20,4 @@ object MainActions {
             true
         } else false
     }
-
-//    fun refactorCell(index: Int, remakeCell: CellType) {
-//        listRepo[index] = remakeCell
-//        adapter.updateData(listRepo)
-//    }
-
 }
