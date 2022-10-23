@@ -25,13 +25,12 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
         notifyDataSetChanged()
     }
 
-    fun insertData(updatedList: MutableList<CellType>) {
-//        if (cellList != null){
-//            cellList.clear()
-//            cellList.addAll(updatedList)
-//        } else cellList = updatedList
-
+    fun insertData() {
         notifyItemInserted(cellList.size - 1)
+    }
+
+    fun deleteCell(position: Int) {
+        notifyItemRemoved(position)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
@@ -44,7 +43,7 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
         holder.nameCellText.text = cellList[position].nameOfProduct
         holder.whereToBuyText.text = cellList[position].whereToBuy
         holder.descriptionText.text = cellList[position].description
-        holder.deleteButton.setOnClickListener { MainActions.deleteCell(this.itemCount) }
+        holder.deleteButton.setOnClickListener { MainActions.deleteCell(position) }
     }
 
     override fun getItemCount() = cellList.size
