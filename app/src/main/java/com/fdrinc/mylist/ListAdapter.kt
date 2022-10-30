@@ -36,7 +36,7 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         val itemView =
-            LayoutInflater.from(parent.context).inflate(R.layout.item_layout, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.item_enabled_layout, parent, false)
         return ListViewHolder(itemView)
     }
 
