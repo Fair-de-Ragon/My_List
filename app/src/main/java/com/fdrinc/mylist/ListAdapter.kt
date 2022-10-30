@@ -10,18 +10,19 @@ import androidx.recyclerview.widget.RecyclerView
 
 class ListAdapter: RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
 
-    private var cellList: MutableList<CellType> = MainActions.listRepo
+    private var cellList = MainActions.listRepo
 
     class ListViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         val nameCellText: TextView = itemView.findViewById(R.id.nameCell)
         val whereToBuyText: TextView = itemView.findViewById(R.id.whereToBuy)
         val descriptionText: TextView = itemView.findViewById(R.id.description)
         val deleteButton: ImageButton = itemView.findViewById(R.id.delete_button)
+     //   val item: CardView = itemView.findViewById(R.id.one_item)
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setData(list: MutableList<CellType>) {
-        cellList = list
+    fun hardUpdate(newData: MutableList<CellType>) {
+        cellList = newData
         notifyDataSetChanged()
     }
 
@@ -44,7 +45,10 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
         holder.whereToBuyText.text = cellList[position].whereToBuy
         holder.descriptionText.text = cellList[position].description
         holder.deleteButton.setOnClickListener { MainActions.deleteCell(position) }
+  //      holder.item.setOnClickListener { }
     }
 
-    override fun getItemCount() = cellList.size
+    override fun getItemCount(): Int {
+        return if (cellList == null) 0 else cellList.size
+    }
 }

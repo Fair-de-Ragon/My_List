@@ -1,11 +1,14 @@
 package com.fdrinc.mylist
 
-import java.text.FieldPosition
-
 object MainActions {
 
-    val adapter: ListAdapter = ListAdapter()
+    var adapter: ListAdapter = ListAdapter()
     var listRepo = mutableListOf<CellType>()
+
+    fun addFirst() {
+        listRepo.add(CellType("Молоко", "Магнит", "10%"))
+        adapter.hardUpdate(listRepo)
+    }
 
     fun deleteCell(position: Int) {
         listRepo.removeAt(position)
