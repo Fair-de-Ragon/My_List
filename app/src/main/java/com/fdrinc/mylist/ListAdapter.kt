@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import java.lang.RuntimeException
 
 class ListAdapter: RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
 
@@ -16,7 +17,7 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
         val nameCellText: TextView = itemView.findViewById(R.id.nameCell)
         val whereToBuyText: TextView = itemView.findViewById(R.id.whereToBuy)
         val descriptionText: TextView = itemView.findViewById(R.id.description)
-        val deleteButton: ImageButton = itemView.findViewById(R.id.delete_button)
+//        val deleteButton: ImageButton = itemView.findViewById(R.id.delete_button)
      //   val item: CardView = itemView.findViewById(R.id.one_item)
     }
 
@@ -35,8 +36,13 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
+        val layout = when (viewType){
+            ITEM_ENABLED -> R.layout.item_enabled_layout
+            ITEM_DISABLED -> R.layout.item_disabled_layout
+            else -> throw RuntimeException("Unknown viewType: $viewType")
+        }
         val itemView =
-            LayoutInflater.from(parent.context).inflate(R.layout.item_enabled_layout, parent, false)
+            LayoutInflater.from(parent.context).inflate(layout, parent, false)
         return ListViewHolder(itemView)
     }
 
@@ -44,11 +50,24 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
         holder.nameCellText.text = cellList[position].nameOfProduct
         holder.whereToBuyText.text = cellList[position].whereToBuy
         holder.descriptionText.text = cellList[position].description
-        holder.deleteButton.setOnClickListener { MainActions.deleteCell(position) }
+//        holder.deleteButton.setOnClickListener { MainActions.deleteCell(position) }
   //      holder.item.setOnClickListener { }
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return when (cellList[position].isActive) {
+            true -> ITEM_ENABLED
+            false -> ITEM_DISABLED
+            else -> ITEM_ENABLED
+        }
     }
 
     override fun getItemCount(): Int {
         return if (cellList == null) 0 else cellList.size
+    }
+
+    companion object {
+        const val ITEM_ENABLED = 11
+        const val ITEM_DISABLED = 10
     }
 }
