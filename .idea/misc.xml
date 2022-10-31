@@ -5,6 +5,9 @@
       <map>
         <entry key="..\:/Learning Kotlin/Udemy/MyList/app/src/main/res/layout/activity_add_new_cell.xml" value="0.365625" />
         <entry key="..\:/Learning Kotlin/Udemy/MyList/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Learning Kotlin/Udemy/MyList/app/src/main/res/layout/activity_more_info.xml" value="0.365625" />
+        <entry key="..\:/Learning Kotlin/Udemy/MyList/app/src/main/res/layout/item_disabled_layout.xml" value="0.36041666666666666" />
+        <entry key="..\:/Learning Kotlin/Udemy/MyList/app/src/main/res/layout/item_enabled_layout.xml" value="0.5" />
         <entry key="..\:/Learning Kotlin/Udemy/MyList/app/src/main/res/layout/item_layout.xml" value="0.5" />
       </map>
     </option>

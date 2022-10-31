@@ -14,11 +14,14 @@
         android:theme="@style/Theme.MyList"
         tools:targetApi="31" >
         <activity
+            android:name=".MoreInfoActivity"
+            android:exported="false" />
+        <activity
             android:name=".AddNewCellActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
