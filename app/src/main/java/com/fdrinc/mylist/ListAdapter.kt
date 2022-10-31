@@ -4,8 +4,8 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import java.lang.RuntimeException
 
@@ -17,8 +17,7 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
         val nameCellText: TextView = itemView.findViewById(R.id.nameCell)
         val whereToBuyText: TextView = itemView.findViewById(R.id.whereToBuy)
         val descriptionText: TextView = itemView.findViewById(R.id.description)
-//        val deleteButton: ImageButton = itemView.findViewById(R.id.delete_button)
-     //   val item: CardView = itemView.findViewById(R.id.one_item)
+        val item: CardView = itemView.findViewById(R.id.one_item)
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -33,6 +32,10 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
 
     fun deleteCell(position: Int) {
         notifyItemRemoved(position)
+    }
+
+    fun softUpdate(position: Int) {
+        notifyItemChanged(position)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
@@ -50,8 +53,10 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
         holder.nameCellText.text = cellList[position].nameOfProduct
         holder.whereToBuyText.text = cellList[position].whereToBuy
         holder.descriptionText.text = cellList[position].description
-//        holder.deleteButton.setOnClickListener { MainActions.deleteCell(position) }
-  //      holder.item.setOnClickListener { }
+        holder.item.setOnClickListener{
+            cellList[position].isActive = !cellList[position].isActive
+            softUpdate(position)
+        }
     }
 
     override fun getItemViewType(position: Int): Int {
