@@ -38,6 +38,8 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
         notifyItemChanged(position)
     }
 
+    var goToMoreInfo: ((Int) -> Unit)? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         val layout = when (viewType){
             ITEM_ENABLED -> R.layout.item_enabled_layout
@@ -56,6 +58,11 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
         holder.item.setOnClickListener{
             cellList[position].isActive = !cellList[position].isActive
             softUpdate(position)
+        }
+        holder.item.setOnLongClickListener {
+            goToMoreInfo?.invoke(position)
+            softUpdate(position)
+            true
         }
     }
 
