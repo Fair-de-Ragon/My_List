@@ -14,10 +14,13 @@ class MoreInfoActivity : AppCompatActivity() {
     private lateinit var whereToBuyInput: EditText
     private lateinit var descriptionInput: EditText
     private lateinit var remakeButton: ImageButton
+    private lateinit var intentExtras: Bundle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_more_info)
+
+         val intentExtras = intent.extras
 
         doneButton = findViewById(R.id.more_info_done)
         nameInput = findViewById(R.id.name_more_info)
@@ -25,6 +28,21 @@ class MoreInfoActivity : AppCompatActivity() {
         descriptionInput = findViewById(R.id.description_more_info)
         remakeButton = findViewById(R.id.more_info_remake)
 
+        if (intentExtras != null) {
+            nameInput.setText(intentExtras.get("nameOfProduct").toString())
+            nameInput.isEnabled = false
+            whereToBuyInput.setText(intentExtras.get("whereToBuy").toString())
+            whereToBuyInput.isEnabled = false
+            descriptionInput.setText(intentExtras.get("description").toString())
+            descriptionInput.isEnabled = false
+        }
 
+        remakeButton.setOnClickListener { lockUnlockFields() }
+    }
+
+    private fun lockUnlockFields() {
+        nameInput.isEnabled = !nameInput.isEnabled
+        whereToBuyInput.isEnabled = !whereToBuyInput.isEnabled
+        descriptionInput.isEnabled = !descriptionInput.isEnabled
     }
 }
