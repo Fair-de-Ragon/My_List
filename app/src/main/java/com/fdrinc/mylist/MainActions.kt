@@ -35,4 +35,11 @@ object MainActions {
             true
         } else false
     }
+
+    fun swipeElements(firstIndex: Int, secondIndex: Int) {
+        val firstEl = listRepo[firstIndex]
+        val secondEl = listRepo[secondIndex]
+        listRepo[firstIndex] = secondEl
+        listRepo[secondIndex] = firstEl
+    }
 }

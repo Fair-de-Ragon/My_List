@@ -1,12 +1,13 @@
 package com.fdrinc.mylist
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.fdrinc.mylist.MainActions.adapter
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -40,5 +41,9 @@ class MainActivity : AppCompatActivity() {
             moreInfoActivity.putExtra("position", it)
             startActivity(moreInfoActivity)
         }
+
+        val callback: ItemTouchHelper.Callback = TouchHelperCallback(adapter)
+        val touchHelper = ItemTouchHelper(callback)
+        touchHelper.attachToRecyclerView(recyclerView)
     }
 }
