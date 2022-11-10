@@ -26,9 +26,19 @@ class MainActivity : AppCompatActivity() {
         val adapter = MainActions.adapter
         recyclerView.adapter = adapter
 
+        val moreInfoActivity = Intent(this@MainActivity, MoreInfoActivity::class.java)
+        val addNewCellActivity = Intent(this@MainActivity, AddNewCellActivity::class.java)
+
         addButton = findViewById(R.id.add_button)
-        val addActivity = Intent(this@MainActivity, AddNewCellActivity::class.java)
-        addButton.setOnClickListener { startActivity(addActivity) }
-        //val moreInfoActivity = Intent(this@MainActivity, MoreInfoActivity::class.java)
+        addButton.setOnClickListener { startActivity(addNewCellActivity) }
+
+
+        adapter.goToMoreInfo = {
+            moreInfoActivity.putExtra("nameOfProduct", MainActions.listRepo[it].nameOfProduct)
+            moreInfoActivity.putExtra("whereToBuy", MainActions.listRepo[it].whereToBuy)
+            moreInfoActivity.putExtra("description", MainActions.listRepo[it].description)
+            moreInfoActivity.putExtra("position", it)
+            startActivity(moreInfoActivity)
+        }
     }
 }
