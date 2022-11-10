@@ -2,6 +2,7 @@ package com.fdrinc.mylist
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
@@ -14,6 +15,7 @@ class MoreInfoActivity : AppCompatActivity() {
     private lateinit var whereToBuyInput: EditText
     private lateinit var descriptionInput: EditText
     private lateinit var remakeButton: ImageButton
+    private lateinit var exceptionText: TextView
     private lateinit var intentExtras: Bundle
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,8 +29,10 @@ class MoreInfoActivity : AppCompatActivity() {
         whereToBuyInput = findViewById(R.id.where_to_buy_more_info)
         descriptionInput = findViewById(R.id.description_more_info)
         remakeButton = findViewById(R.id.more_info_remake)
+        /**TODO change id after deleting AddNewCellActivity*/
+        exceptionText = findViewById(R.id.exeption_text2)
 
-        if (intentExtras != null) {
+        if ( intentExtras != null) {
             nameInput.setText(intentExtras.get("nameOfProduct").toString())
             nameInput.isEnabled = false
             whereToBuyInput.setText(intentExtras.get("whereToBuy").toString())
