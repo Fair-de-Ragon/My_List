@@ -41,6 +41,16 @@ class MoreInfoActivity : AppCompatActivity() {
             descriptionInput.isEnabled = false
         }
 
+        doneButton.setOnClickListener {
+            if (MainActions.remakeCell(
+                nameInput.editableText.toString(),
+                whereToBuyInput.editableText.toString(),
+                descriptionInput.editableText.toString(),
+                intentExtras?.get("position").toString().toInt()
+            )) onBackPressed()
+            else exceptionText.setText(R.string.exception)
+        }
+
         remakeButton.setOnClickListener { lockUnlockFields() }
     }
 

@@ -25,4 +25,14 @@ object MainActions {
             true
         } else false
     }
+
+    fun remakeCell(name: String, whereToBuy: String, description: String, position: Int): Boolean {
+        return if (name.isNotEmpty() && whereToBuy.isNotEmpty() && description.isNotEmpty()) {
+            val modifiedCell = CellType(name, whereToBuy, description, listRepo[position].isActive)
+          //  listRepo.removeAt(position)
+            listRepo[position] = modifiedCell
+            adapter.softUpdate(position)
+            true
+        } else false
+    }
 }

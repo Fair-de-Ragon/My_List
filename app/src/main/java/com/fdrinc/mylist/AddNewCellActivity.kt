@@ -35,7 +35,6 @@ class AddNewCellActivity : AppCompatActivity() {
         descriptionInput.isEnabled = true
 
         doneButton.setOnClickListener {
-
             if (MainActions.addCell(
                     nameInput.editableText.toString(),
                     whereToBuyInput.editableText.toString(),
