@@ -98,10 +98,13 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.ListViewHolder>(), ItemTouch
         notifyItemMoved(fromPosition, toPosition)
     }
 
-    override fun onItemDismiss(position: Int) {
+    override fun onItemSwipeLeft(position: Int) {
         MainActions.deleteCell(position)
         notifyItemRemoved(position)
     }
 
-
+    override fun onItemSwipeRight(position: Int) {
+        cellList[position].isActive = !cellList[position].isActive
+        softUpdate(position)
+    }
 }

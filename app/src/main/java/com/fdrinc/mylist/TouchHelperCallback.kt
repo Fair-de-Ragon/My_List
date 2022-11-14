@@ -1,5 +1,6 @@
 package com.fdrinc.mylist
 
+import android.graphics.Canvas
 import android.os.Parcel
 import android.os.Parcelable
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -34,7 +35,11 @@ class TouchHelperCallback() : ItemTouchHelper.Callback(), Parcelable {
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-        mAdapter?.onItemDismiss(viewHolder.adapterPosition);
+        if (direction == ItemTouchHelper.LEFT) {
+            mAdapter?.onItemSwipeLeft(viewHolder.adapterPosition);
+        } else {
+            mAdapter?.onItemSwipeRight(viewHolder.adapterPosition)
+        }
     }
 
 
@@ -64,4 +69,30 @@ class TouchHelperCallback() : ItemTouchHelper.Callback(), Parcelable {
         }
     }
 
+    override fun onChildDraw(
+        c: Canvas,
+        recyclerView: RecyclerView,
+        viewHolder: RecyclerView.ViewHolder,
+        dX: Float,
+        dY: Float,
+        actionState: Int,
+        isCurrentlyActive: Boolean
+    ) {
+        if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
+            when (dX) {
+                in 0f..500f -> viewHolder.itemView.translationX = dX / 2
+                in -500f..0f -> viewHolder.itemView.translationX = dX / 2
+            }
+        } else {
+            super.onChildDraw(
+                c,
+                recyclerView,
+                viewHolder,
+                dX,
+                dY,
+                actionState,
+                isCurrentlyActive
+            )
+        }
+    }
 }
