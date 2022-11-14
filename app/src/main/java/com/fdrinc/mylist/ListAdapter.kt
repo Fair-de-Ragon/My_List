@@ -7,10 +7,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.ItemTouchHelper.Callback.makeMovementFlags
 import androidx.recyclerview.widget.RecyclerView
 
 
-class ListAdapter: RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
+class ListAdapter: RecyclerView.Adapter<ListAdapter.ListViewHolder>(), ItemTouchHelperAdapter {
 
     private var cellList = MainActions.listRepo
 
@@ -82,5 +83,28 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
     companion object {
         const val ITEM_ENABLED = 11
         const val ITEM_DISABLED = 10
+    }
+
+    override fun onItemMove(fromPosition: Int, toPosition: Int) {
+        if (fromPosition < toPosition) {
+            for (i in fromPosition until toPosition) {
+                MainActions.swipeElements(i, i + 1)
+            }
+        } else {
+            for (i in fromPosition downTo toPosition + 1) {
+                MainActions.swipeElements(i, i - 1)
+            }
+        }
+        notifyItemMoved(fromPosition, toPosition)
+    }
+
+    override fun onItemSwipeLeft(position: Int) {
+        MainActions.deleteCell(position)
+        notifyItemRemoved(position)
+    }
+
+    override fun onItemSwipeRight(position: Int) {
+        cellList[position].isActive = !cellList[position].isActive
+        softUpdate(position)
     }
 }

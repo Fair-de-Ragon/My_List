@@ -29,10 +29,16 @@ object MainActions {
     fun remakeCell(name: String, whereToBuy: String, description: String, position: Int): Boolean {
         return if (name.isNotEmpty() && whereToBuy.isNotEmpty() && description.isNotEmpty()) {
             val modifiedCell = CellType(name, whereToBuy, description, listRepo[position].isActive)
-          //  listRepo.removeAt(position)
             listRepo[position] = modifiedCell
             adapter.softUpdate(position)
             true
         } else false
+    }
+
+    fun swipeElements(firstIndex: Int, secondIndex: Int) {
+        val firstEl = listRepo[firstIndex]
+        val secondEl = listRepo[secondIndex]
+        listRepo[firstIndex] = secondEl
+        listRepo[secondIndex] = firstEl
     }
 }
