@@ -1,5 +1,6 @@
 package com.fdrinc.mylist
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
@@ -18,7 +19,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        MainActions.addFirst()
+        val sharedPreferences = getSharedPreferences("phoneRepo", Context.MODE_PRIVATE)
+
+        MainActions.getSharedPreferences(sharedPreferences)
 
         val recyclerView: RecyclerView = findViewById(R.id.recycler_view)
         layoutManager = LinearLayoutManager(this)
@@ -45,5 +48,6 @@ class MainActivity : AppCompatActivity() {
         val callback: ItemTouchHelper.Callback = TouchHelperCallback(adapter)
         val touchHelper = ItemTouchHelper(callback)
         touchHelper.attachToRecyclerView(recyclerView)
+
     }
 }
