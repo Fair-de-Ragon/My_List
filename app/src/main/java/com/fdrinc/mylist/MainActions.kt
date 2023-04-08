@@ -1,9 +1,8 @@
 package com.fdrinc.mylist
 
 import android.content.SharedPreferences
-import java.lang.StringBuilder
 
-object MainActions {
+object MainActions: SharedPref() {
 
     var adapter: ListAdapter = ListAdapter()
     var listRepo = mutableListOf<CellType>()
@@ -45,31 +44,5 @@ object MainActions {
         val secondEl = listRepo[secondIndex]
         listRepo[firstIndex] = secondEl
         listRepo[secondIndex] = firstEl
-    }
-
-    private fun updateSharedPreferences (sharedPreferences: SharedPreferences){
-        val st = StringBuilder()
-        for (cellType in listRepo) {
-            st.append(cellType.nameOfProduct + "/" + cellType.whereToBuy + "/" + cellType.description + "/" + cellType.isActive + "[]")
-        }
-        sharedPreferences.edit().putString("listRepo", st.toString()).apply()
-    }
-
-    fun getSharedPreferences (sharedPreferences: SharedPreferences){
-        sharedPreferencesInRepo = sharedPreferences
-        val gotString = sharedPreferences.getString("listRepo", null)
-        if (gotString != null) {
-            val collectionOfStringCellType: List<String> = gotString.split("[]")
-            for (stringCellType in collectionOfStringCellType.dropLast(1)) {
-                val listOfParam = stringCellType.split("/")
-                val cellType = CellType(
-                    listOfParam[0],
-                    listOfParam[1],
-                    listOfParam[2],
-                    listOfParam[3].equals("true"))
-                listRepo.add(cellType)
-                adapter.hardUpdate(listRepo)
-            }
-        } else addFirst()
     }
 }
